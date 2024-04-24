@@ -1,8 +1,2 @@
-Merhaba|deneme dosyasına hoşgeldin.
-Bu|sadece test amaçlı bir dosya
-İyi|şanslar!
-132
-456
-45654
-54
-56
+admin|1234
+user|4567

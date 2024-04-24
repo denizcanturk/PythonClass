@@ -7,3 +7,11 @@
 # Kullanıcının yaptığı tahmin sayısı ve yaptığı tahminler
 # oyun sonunda ekrana yazdırılır
 # Oyuncu oyundan çıkmak için q harfi ile giriş yapmalıdır
+fullPath = "/home/debinci/Desktop/proje/Dosyaİslemleri/sifre.txt"
+file = open(fullPath, "r")
+print(file.read())
+
+print(file.fileno())
+
+# for line in file:
+#     print(line.replace("\n",""))
