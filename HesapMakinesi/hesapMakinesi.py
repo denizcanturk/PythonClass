@@ -2,7 +2,7 @@
 # + Çıkarma
 # + Çarpma
 # + Bölme
-# + Karakök Alma
+# + Kök Alma
 # + Kuvvetini alma
 # + Bölümden kalanı bulma
 
