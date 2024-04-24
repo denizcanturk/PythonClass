@@ -2,3 +2,4 @@ Merhaba|deneme dosyasına hoşgeldin.
 Bu|sadece test amaçlı bir dosya
 İyi|şanslar!
 132
+456
