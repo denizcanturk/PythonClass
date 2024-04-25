@@ -30,4 +30,6 @@ while True:
         print("Kutlaaarrııııızzzz....")
         break
 
-print(tahminListesi, " tahmin sayısı: " , len(tahminListesi))
+for i,item in enumerate(tahminListesi):
+    print(i+1,".\ttahmin: ", item, sep="")
+print("Oyun toplam {} adımda tamamlandı".format(len(tahminListesi)))
