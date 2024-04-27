@@ -7,3 +7,6 @@
 # + Bölümden kalanı bulma
 
 # işlemlerini yerine getirecek bir hesap makinesi 
+
+s = input("")
+print(ord(s))

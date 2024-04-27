@@ -31,5 +31,5 @@ while True:
         break
 
 for i,item in enumerate(tahminListesi):
-    print(i+1,".\ttahmin: ", item, sep="")
-print("Oyun toplam {} adımda tamamlandı".format(len(tahminListesi)))
+    print(i+1,".\ttahmin: ".expandtabs(3), item, sep="")
+print("Oyun, {} adımda tamamlandı".format(len(tahminListesi)))
