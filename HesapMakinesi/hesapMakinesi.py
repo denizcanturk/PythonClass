@@ -9,15 +9,35 @@
 # işlemlerini yerine getirecek bir hesap makinesi 
 from math import pow
 sonuc = 0
-def toplama(num1:int, num2:int)->int:
-    return num1+num2
 
-def kokalma(num1:int, num2:int)->int:
+def toplama(num1:int, num2: int) -> int:
+    return num1 + num2
+
+def cikarma(num1, num2):
+    return num1 - num2
+
+def carpma(num1, num2):
+    return num1 * num2
+
+def bolme(num1, num2):
+    if num2== 0:
+        return "Bölen 0 olamaz"
+    else:
+        return num1/num2
+    
+    # try:
+    #     return num1 / num2
+    # except ZeroDivisionError:
+    #     return "Bölen 0 olamaz!"
+
+def kokAlma(num1, num2):
     return pow(num1, 1/num2)
 
-def kuvvetiniAlma(num1,num2):
-    return pow(num1,num2)
-    #return num1**1/num2
+def kuvvetiniAlma(num1, num2):
+    return pow(num1, num2)
+
+def bolumdenKalaniniBulma(num1, num2):
+    return num1 % num2
 
 secim = input("1. Toplama\n" \
               "2. Çıkarma\n" \
@@ -40,7 +60,9 @@ elif int(secim) not in range(1,9):
 
 a = int(input("1.Sayıyı Giriniz : "))
 b = int(input("2.Sayıyı Giriniz : "))
+
 sonuc = 0
+
 if secim == "1":
    sonuc = toplama(a,b)
 elif secim == "2":
@@ -56,4 +78,4 @@ elif secim == "6":
 elif secim == "7":
     None
 
-print("İşleminizin sonucu : ".format(sonuc))
+print("İşleminizin sonucu : {}".format(sonuc))

@@ -22,22 +22,25 @@ while True:
     elif not kullaniciSecimi.isdigit():
         print("Paşam sana zahmet bir sayı giriver...")
         continue
+    elif int(kullaniciSecimi) > MAX or int(kullaniciSecimi) < MIN:
+        print("Belirtilen sayı aralığında giriş yapınız...")
+        continue
+    else:
+        kullaniciSecimi = int(kullaniciSecimi)
 
-    kullaniciSecimi = int(kullaniciSecimi)
+        tahminListesi.append(kullaniciSecimi)
+        
+        if kullaniciSecimi > bilgisayarSecimi:
+            print("Daha küçük olmalı")
+            MAX = kullaniciSecimi
 
-    tahminListesi.append(kullaniciSecimi)
-    
-    if kullaniciSecimi > bilgisayarSecimi:
-        print("Daha küçük olmalı")
-        MAX = kullaniciSecimi
+        elif bilgisayarSecimi > kullaniciSecimi:
+            print("Daha büyük olmalı")
+            MIN = kullaniciSecimi
 
-    elif bilgisayarSecimi > kullaniciSecimi:
-        print("Daha büyük olmalı")
-        MIN = kullaniciSecimi
-
-    elif bilgisayarSecimi == kullaniciSecimi:
-        print("Kutlaaarrııııızzzz....")
-        break
+        elif bilgisayarSecimi == kullaniciSecimi:
+            print("Kutlaaarrııııızzzz....")
+            break
 
 for idx,i in enumerate(tahminListesi):
     print(idx+1 ,". Tahmin : ", i)
