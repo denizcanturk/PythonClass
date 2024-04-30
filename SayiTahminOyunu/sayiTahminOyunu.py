@@ -7,6 +7,7 @@
 # Kullanıcının yaptığı tahmin sayısı ve yaptığı tahminler
 # oyun sonunda ekrana yazdırılır
 # Oyuncu oyundan çıkmak için q harfi ile giriş yapmalıdır"""
+
 from random import randint
 
 bilgisayarSecimi = randint(1,100)
@@ -14,22 +15,31 @@ MIN = 1
 MAX = 100
 tahminListesi = []
 while True:
-    kullaniciSecimi = int(input("{}-{} arasında Sayi arassında giriniz : ".format(MIN,MAX)))
+    kullaniciSecimi = input("{}-{} arasında Sayi arassında giriniz : ".format(MIN,MAX))
     
+    if kullaniciSecimi == "q":
+        break
+    elif not kullaniciSecimi.isdigit():
+        print("Paşam sana zahmet bir sayı giriver...")
+        continue
+
+    kullaniciSecimi = int(kullaniciSecimi)
+
     tahminListesi.append(kullaniciSecimi)
     
     if kullaniciSecimi > bilgisayarSecimi:
         print("Daha küçük olmalı")
         MAX = kullaniciSecimi
 
-    if bilgisayarSecimi > kullaniciSecimi:
+    elif bilgisayarSecimi > kullaniciSecimi:
         print("Daha büyük olmalı")
         MIN = kullaniciSecimi
 
-    if bilgisayarSecimi == kullaniciSecimi:
+    elif bilgisayarSecimi == kullaniciSecimi:
         print("Kutlaaarrııııızzzz....")
         break
 
-for i,item in enumerate(tahminListesi):
-    print(i+1,".\ttahmin: ".expandtabs(3), item, sep="")
-print("Oyun, {} adımda tamamlandı".format(len(tahminListesi)))
+for idx,i in enumerate(tahminListesi):
+    print(idx+1 ,". Tahmin : ", i)
+
+print("Tahmin Sayısı : {}".format(len(tahminListesi)))
