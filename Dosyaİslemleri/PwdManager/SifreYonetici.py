@@ -1,17 +1,4 @@
-# Bilgisayar 1-100 arasında bir sayı üretir
-# Kullanıcıya giriş yapması gereken aralık belirtilir
-# Kullanıcı sayıyı buluncaya kadar yönlendirilir
-# Örn.: Kullanıcı ilk iki tahmininde 15 ve 85 girdi ise:
-# Sayı girmesi gereken aralık "15-85 arasında bir sayı giriniz:" şeklinde olmalıdır
-# Kullanıcının yaptığı tahminler bir listede tutulur
-# Kullanıcının yaptığı tahmin sayısı ve yaptığı tahminler
-# oyun sonunda ekrana yazdırılır
-# Oyuncu oyundan çıkmak için q harfi ile giriş yapmalıdır
-fullPath = "/home/debinci/Desktop/proje/Dosyaİslemleri/sifre.txt"
-file = open(fullPath, "r")
-print(file.read())
-
-print(file.fileno())
-
-# for line in file:
-#     print(line.replace("\n",""))
+# Kullanıcı adı ve şifresi bir text dosyasında tutulur
+# Kullanıcı adı ve şifresi girilirken tek satırda, boşlu bırakılmadan "|" karakteri ile ayrılarak girilmelidir
+# Program, şifre dosyasını görüntüleme, kullanıcı ekleme, mevcut kullanıcıya ait şifreyi değiştirebilme ve kullanıcı silme özelliğine sahip olmalıdır
+# Yeni kullanıcılar yeni bir satır olarak eklenir
