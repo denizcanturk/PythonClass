@@ -1,7 +1,31 @@
+#Absolute Path
+dosyaKonumu = "/home/debinci/Desktop/proje/Dosyaİslemleri/metin.txt"
+#Relative Path
+dk = "Dosyaİslemleri/metin.txt"
+dosya = open(dosyaKonumu, "r", encoding="utf-8")
+
+# print(dosya.tell())
+# icerik = dosya.read(10)
+
+# print(dosya.tell())
+# icerik2=dosya.read(3)
+
+# print(dosya.tell())
+# print(icerik)
+# print(icerik2)
 
 
-dosya = open("/home/debinci/Desktop/proje/Dosyaİslemleri/metin.txt","r")
+# satir1 = dosya.readline().replace("\n", "")
+# print(dosya.tell())
+# satir2 = dosya.readline()
+# print(dosya.tell())
 
-icerik = dosya.readlines()
-for satir in icerik:
-    print(satir)
+# print(satir1)
+# print(satir2, end="")
+
+satirlar = dosya.readlines()
+
+print(len(satirlar))
+
+# for satir in satirlar:
+#     print(satirlar)
