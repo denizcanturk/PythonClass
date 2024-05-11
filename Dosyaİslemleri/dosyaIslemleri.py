@@ -7,7 +7,6 @@ dosya = open(dosyaKonumu, "r")
 
 satirlar = dosya.readlines()
 
-
 print(satirlar)
 
 for satir in satirlar:
