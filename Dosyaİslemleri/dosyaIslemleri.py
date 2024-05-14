@@ -3,11 +3,11 @@ dosyaKonumu = "/home/debinci/Desktop/proje/Dosyaİslemleri/metin.txt"
 #Relative Path
 relativeDosyaKonumu = "Dosyaİslemleri/metin.txt"
 
-dosya = open(dosyaKonumu, "r")
+dosya = open(dosyaKonumu, "r+", encoding="utf-8")
 
-satirlar = dosya.readlines()
+icerik = dosya.readlines()
 
-print(satirlar)
+icerik.insert(1,"Benim Adım Batman")
 
-for satir in satirlar:
-    print(satir)
+print(icerik)
+dosya.writelines()
