@@ -3,11 +3,17 @@ dosyaKonumu = "/home/debinci/Desktop/proje/Dosyaİslemleri/metin.txt"
 #Relative Path
 relativeDosyaKonumu = "Dosyaİslemleri/metin.txt"
 
-dosya = open(dosyaKonumu, "r+", encoding="utf-8")
+# dosya = open(dosyaKonumu, "w+", encoding="utf-8")
 
-icerik = dosya.readlines()
+# icerik = dosya.readlines()
 
-icerik.insert(1,"Benim Adım Batman")
+# icerik.insert(1,"Benim Adım Batman")
 
-print(icerik)
-dosya.writelines()
+# print(icerik)
+# dosya.seek(0)
+# dosya.writelines(icerik)
+
+
+with open(dosyaKonumu,"w+", encoding="utf-8") as dosya:
+    icerik = dosya.read()
+    print(icerik)
