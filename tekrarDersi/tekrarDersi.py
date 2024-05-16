@@ -26,11 +26,17 @@
 # print(p)
 
 #Sayının karekokunu al
-import random as r
-from random import randint
-import math as m
-from math import sqrt as s
-rastgele = randint(1,100)
+# import random as r
+# from random import randint
+# import math as m
+# from math import sqrt as s
+# rastgele = randint(1,100)
 
-sonuc = s(100)
-print(sonuc)
+# sonuc = s(100)
+# print(sonuc)
+
+print("ş".encode())
+print("ç".encode())
+print("ğ".encode())
+print("ı".encode())
+print("İ".encode())
