@@ -48,7 +48,10 @@ def kullaniciSil(dosyaYolu):
             if kullaniciAdi in satir:
                 icerik.pop(i)
             else:
-                
+                print("Bulamadım...")
+            
+
+
         with open(dosyaYolu,"w") as dosya:
             dosya.writelines(icerik)
 
