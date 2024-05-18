@@ -47,8 +47,10 @@ def kullaniciSil(dosyaYolu):
         for i, satir in enumerate(icerik) :
             if kullaniciAdi in satir:
                 icerik.pop(i)
+                
             else:
-                print("Bulamadım...")
+                if i == len(icerik)-1:
+                    print("Kullanıcı mevcut değil.")
             
 
 
@@ -67,7 +69,7 @@ print("Seçenekleriniz :\n"
       "4. şifre Değiştirme\n"
       "5.Çıkış\n")
 
-cevap = input("Bir seçenek seçiniz :")
+cevap = input("Seçiminiz :")
 
 if cevap==  "1":
     tumunuGoruntule(dosyaKonumu)
