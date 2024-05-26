@@ -32,7 +32,6 @@ def tumunuGoruntule(filePath):
         print("Belirtilen konumda dosya mevcut değil...")
         
 def kullaniciEkle(dosyaYolu):
-    global anahtar
     if os.path.exists(dosyaYolu):
         yeniKullaniciAdi = input("Kullanıcı Adı Giriniz :")
         yenSifre = input("Sifre Giriniz :")
@@ -67,7 +66,6 @@ def kullaniciSil(dosyaYolu):
         print("Dosya yok...")
 
 def sifreDegistirme(dosyaYolu):
-    global anahtar
     if os.path.exists(dosyaYolu):
         kullaniciAdi = input("Kullanıcı Adını Giriniz : ")
         with open(dosyaYolu, "r") as dosya:

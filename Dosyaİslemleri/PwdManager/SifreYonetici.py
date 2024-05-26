@@ -9,8 +9,12 @@
 #
 # Yeni kullanıcılar yeni bir satır olarak eklenir
 
-from pwdLibs import main
+# from pwdLibs import main
+from CPwdManager import PasswordManager
+#import CPwdManager as c
 
+dosyaKonumu = "/home/debinci/Desktop/proje/Dosyaİslemleri/PwdManager/sifre.txt"
+anahtarKonumu = "/home/debinci/Desktop/proje/Dosyaİslemleri/PwdManager/key.data"
 
 if __name__ == "__main__":
-    main()
+    pwdMng = PasswordManager(dosyaKonumu, anahtarKonumu)
