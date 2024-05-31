@@ -40,4 +40,3 @@ isci2 = Calisan("İnci", "Boncuk", 15)
 
 isci.bilgileriDok()
 isci2.bilgileriDok()
-
