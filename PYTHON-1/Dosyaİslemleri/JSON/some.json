@@ -1,0 +1,21 @@
+{
+    "Adi": "Ajda",
+    "Yasi": null,
+    "EvliMi": false,
+    "BosanmisMi": true,
+    "Cocuk": [
+        "Incik",
+        "Boncuk"
+    ],
+    "pets": null,
+    "cars": [
+        {
+            "model": "BMW 230",
+            "hacim": 2500
+        },
+        {
+            "model": "Ford Edge",
+            "hacim": 3000
+        }
+    ]
+}

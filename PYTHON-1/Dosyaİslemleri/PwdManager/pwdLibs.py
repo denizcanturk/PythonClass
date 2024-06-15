@@ -1,35 +1,37 @@
 import os
 from cryptography.fernet import Fernet
+# key = anahtarOku()
+# anahtar = Fernet(key)
 
 dosyaKonumu = "/home/debinci/Desktop/proje/Dosyaİslemleri/PwdManager/sifre.txt"
 anahtarKonumu = "/home/debinci/Desktop/proje/Dosyaİslemleri/PwdManager/key.data"
 
-#Sadece Bir kere 
-def anahtarOlustur():
-    key = Fernet.generate_key()
-    with open(anahtarKonumu,"wb") as dosya:
-        dosya.write(key)
+class SifreYonetici():
+    def __init__(self, dosyaYolu, anahtarYolu):
+        self.dosyaKonumu = dosyaYolu
+        self.anahtarKonumu = anahtarYolu
 
-def anahtarOku():
-    if not os.path.exists(anahtarKonumu):
-        print("Dosya olusturuldu...")
-        anahtarOlustur()
-    with open(anahtarKonumu, "rb") as file:
-        key = file.read()
-        return key
+    #Sadece Bir kere 
+    def anahtarOlustur(self):
+        key = Fernet.generate_key()
+        with open(self.anahtarKonumu,"wb") as dosya:
+            dosya.write(key)
 
-key = anahtarOku()
-anahtar = Fernet(key)
+    def anahtarOku(self):
+        if not os.path.exists(self.anahtarKonumu):
+            print("Dosya olusturuldu...")
+            self.anahtarOlustur()
+        with open(self.anahtarKonumu, "rb") as file:
+            key = file.read()
+            return key
 
-def tumunuGoruntule(filePath):
-    if os.path.exists(filePath):
-        with open(filePath, "r") as dosya:
+
+    def tumunuGoruntule(self):
+        with open(self.dosyaKonumu, "r") as dosya:
             for line in dosya:
                 kullanici, sifre = line.replace("\n","").split(":")
                 sifre = anahtar.decrypt(sifre.encode()).decode()
                 print(f"Kullanıcı Adı: {kullanici}\t Sifre: {sifre}")
-    else:
-        print("Belirtilen konumda dosya mevcut değil...")
         
 def kullaniciEkle(dosyaYolu):
     if os.path.exists(dosyaYolu):
