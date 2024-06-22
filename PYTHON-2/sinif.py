@@ -136,7 +136,77 @@
 # print(int(deg2+deg3))
 
 
-mtn = "python"
+# mtn = "python"
 
-for hrf in mtn :
-    print(hrf)
+# for hrf in mtn :
+#     print(hrf)
+
+# i = 1
+# while True:
+#     print(i)
+#     i+=1
+
+#     if i > 100:
+#         print("Deniz")
+#         break
+
+# print("iŞLEM TAMAMLANDI!")
+
+
+# shape = "*"
+# a = 10
+# b=0
+# while b <= a :
+#     b +=1
+#     print(shape*b)
+
+#     *
+#    ***
+#   *****
+#  *******
+# *********
+
+# 0 1 1 2 3 5 8 13 21 34 ....(50)
+
+# mtn="python"
+# for i in mtn:
+#     print(i,end="")
+
+# print("THE END!")
+
+# sayi1 = 0
+# sayi2 = 1
+# araTop = 0
+# for i in range(1):
+#     print(sayi1)
+#     araTop = sayi1 + sayi2
+#     sayi1 =sayi2
+#     sayi2 = araTop
+
+
+# for i in range(5):
+#     for j in range(i):
+#         print(" ", end="")
+#     for j in range(i, 5):
+#         print("* ", end="")
+#     print()
+
+
+# for i in range(5):
+#     for j in range(5, i, -1):
+#         print(" ", end="")
+#     for k in range(i + 1):
+#         print("* ", end="")
+#     print()
+
+
+# sampleText = """bu Benim Dünyam"""
+
+# newText = sampleText.capitalize()
+# print(newText)
+
+# caseFolded = sampleText.casefold()
+# print(caseFolded)
+# print(sampleText)
+
+# sampleText.count()
