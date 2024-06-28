@@ -210,4 +210,84 @@
 # print(sampleText)
 
 # sampleText.count()
+metin = """Avrupa Parlamentosu, dünyada yapay zeka kullanımına ilişkin kurallar getiren ilk yasal düzenleme olan, Avrupa Yapay Zeka Yasasını onayladı. Yeni yasa ile yüz tanıma amaçlı veri tabanı oluşturan sistemler de dahil olmak üzere insan haklarını tehdit eden yapay zeka uygulamaları yasaklanıyor. Avrupa Birliği (AB) Komisyonu, Avrupa Parlamentosu ve üye ülkelerin daha önce üzerinde uzlaşmaya vardığı düzenleme, Çarşamba günü parlamento genel kurulunda ele alındı. Avrupa Yapay Zeka Yasası, 46’ya karşı 523 üyenin oyuyla kabul edildi. Yeni yasa ile yüz tanıma amaçlı veri tabanı oluşturan sistemler de dahil olmak üzere insan haklarını tehdit eden yapay zeka uygulamaları yasaklanıyor. Avrupa Birliği (AB) Komisyonu, Avrupa Parlamentosu ve üye ülkelerin daha önce üzerinde uzlaşmaya vardığı düzenleme, Çarşamba günü parlamento genel kurulunda ele alındı. Avrupa Yapay Zeka Yasası, 46’ya karşı 523 üyenin oyuyla kabul edildi. Dünyada genel amaçlı yapay zeka kullanımına ilişkin önlemler içeren ilk düzenleme olan yasa, özellikle güvenlik güçleri tarafından biyometrik tanımlama sistemlerinin kullanımı konusunda sınırlamalar getiriyor. Düzenleme, hassas özelliklere dayalı biyometrik sınıflandırma sistemleri ve yüz tanıma veritabanları oluşturmak için internetten veya güvenlik kamerası görüntülerinin saklanması da dahil olmak üzere, vatandaşların haklarını tehdit eden belirli yapay zeka uygulamalarını yasaklıyor. Yasa ile iş yeri, okullar ve diğer toplumsal alanlarda kullanıcının güvenlik açıklarını manipüle etmek veya istismar etmek için kullanılan sosyal puanlama ve yapay zeka uygulamaları da yasaklanıyor. Biyometrik tanımlama sistemlerinin güvenlik güçleri tarafından kullanılması, ancak terör saldırısı veya kayıp gibi olağan dışı durumlarda ve adli makamların izniyle mümkün olacak. Yeni yasa, su, enerji, yargı, güvenlik, sağlık ve biyometri gibi yaşamsal öneme sahip alanları yönetmek için kullanılan yapay zeka sistemleri için de düzenlemeler içeriyor. Sağlık, güvenlik, temel haklar, çevre, demokrasi ve hukukun üstünlüğüne yönelik önemli potansiyel zararların önüne geçilmesi için bu alanlarda kullanılacak yapay zeka uygulamalarına ayrıntılı belgeler, net kullanıcı bilgileri, insan gözetimi gibi katı koşullar getiriliyor. Yasa kapsamında, "deepfake" adı verilen, yapay veya değiştirilmiş görsellerin, ses veya video içeriklerinin açıkça belirtilmesi de zorunlu olacak. Avrupa Yapay Zeka Yasası, AB vatandaşlarının, yapay zeka sistemleri hakkında şikayette bulunma ve haklarını etkileyen yüksek riskli yapay zeka sistemlerine dayalı kararlar hakkında bilgi edinmelerine de olanak sağlayacak.  Avrupa Parlamentosu İç Pazar Komitesi eş raportörü Brando Benifei, riskleri azaltmak, fırsatlar yaratmak, ayrımcılıkla mücadele etmek ve şeffaflık getirmek için yapay zeka konusunda dünyanın ilk bağlayıcı yasasının hayata geçirildiğini söyledi. İtalyan parlamenter, yasa sayesinde kabul edilemez yapay zeka uygulamalarının Avrupa'da yasaklanacağını ve vatandaşların haklarının korunacağını vurguladı.Parlamento Sivil Özgürlükler Komitesi eş raportörü Dragos Tudorache de, "AB amacına ulaştı. Yapay zeka kavramını toplumlarımızın temelini oluşturan temel değerlere bağladık" dedi. Avrupa Yapay Zeka Yasası, AB Komisyonu’nun onayının ardından resmi gazetede yayımlanacak. Yasa, Mayıs ayından itibaren, 2 yıl içinde aşamalı olarak bütün birlik genelinde yürürlüğe girecek. Kabul edilemez yapay zeka sistemlerine yönelik yasaklar 6 ay sonra, ChatGPT ve Midjourney gibi üretken yapay zeka sistemlerine ilişkin kurallar da önümüzdeki yıl uygulamaya konacak. Yasaya ilişkin nihai kurallar da, yapay zeka uygulamalarının ön yargılı ya da ayrımcı olup olmadığı konusundaki insan hakları testlerinin ardından Mayıs 2026'da yürürlüğe girmiş olacak. Yasada belirtilen kuralları ihlal eden şirketler, toplam cirolarının yüzde 7'si oranında para cezasına çarptırılabilecek."""
 
+"""1) Metin içinde “yapay” ifadesinin kaç defa geçtiğini bulan programı yazınız.
+	Ornek Çıktı : “Metin içerisinde ‘yapay’ kelimesi 25 defa kullanılmıştır.”"""
+
+#Soru -1 
+# count = metin.count("yapay")
+# print(count)
+
+#Soru - 2
+"""2) Metin içinde “zeka”  ifadesinin geçtiği 
+konumları (başlangıc ve bitiş konumları ) ekrana yazdıran programı yazınız."""
+
+# aranacakKelime = "zeka"
+# konum = -1
+# sayac = 0
+# kucukMetin = metin.lower()
+# while True: 
+#     konum = kucukMetin.find(aranacakKelime, konum+1)
+#     if konum > -1:
+#         print("Kelime Başlangıcı :", konum," - ",konum+len(aranacakKelime))
+#         sayac +=1
+#     else:
+#         print("Metin Sonuna ulaşıldı.")
+#         break
+        
+# print(sayac)
+
+#Soru - 3
+"""3) Metin içinde geçen küçük harf ve büyük harfleri yazdıran programı yazınız.
+	Örn.Çıktı : “Metin içinde …. adet küçük, …. adet büyük harf tespit edilmiştir.”"""
+# kucuk = 0
+# buyuk = 0
+# for hrf in metin:
+#     if hrf.islower():
+#         kucuk+=1
+#     if hrf.isupper():
+#         buyuk+=1
+
+# print("Metin içinde ", kucuk, "Adet kucuk harf ve ", buyuk, "adet buyuk harf var")
+
+#Soru-4
+"""4)  Metin içinde bulunan non-alphanumeric karakterlerin sayısını bulan programı yazınız."""
+# sayac = 0
+# for hrf in metin:
+#     if hrf.isalnum():
+#         sayac +=1
+
+# print(sayac)
+
+#Soru - 5
+"""5) Metin içinde ascii karakter tablosunda bulunmayan harf sayısını bulan programı yazınız."""
+
+# sayac = 0
+# for hrf in metin:
+#     if not hrf.isascii():
+#         sayac+=1
+# print(sayac)
+
+#Soru -6 
+"""6) Metin içinde geçen “yasa” ifadesini, “Kanun” ifadesi ile değiştiren 
+ve kaç adet değişiklik yapıldığını belirten programı yazınız."""
+
+# yeniMetin = metin.replace("yasa","Kanun")
+
+# print(yeniMetin)
+
+# gunler = ["pazar", "p.tesi","salı"]
+# renkler = ["mor", "mavi", "yeşil",1,2]
+# gunler.extend(renkler)
+# gunler.extend("mor")
+# print(gunler)
+# print(renkler.sort())
+
+# metin = "Python;2;sinifi;ortalığı;yıkıp;geçiyor"
+# mtnL = metin.split(";")
+# print(mtnL)
+# mtnL.reverse()
+# gunler = ["pazar", "p.tesi","salı"]
+
+# print(gunler.count("pazar"))
