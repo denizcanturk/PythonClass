@@ -9,7 +9,7 @@ while True:
     2. Kağıt
     3. Makas
     --------
-    q. Çıkış\n>: """)
+    4. Çıkış\n>: """)
     
     if oyuncu not in k.girilebilirDegerler:
         print("Lütfen belirtilen değerlerden birini seçiniz")
