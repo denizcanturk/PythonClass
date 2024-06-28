@@ -190,7 +190,7 @@
 #     for j in range(i, 5):
 #         print("* ", end="")
 #     print()
-
+739
 
 # for i in range(5):
 #     for j in range(5, i, -1):
@@ -210,3 +210,4 @@
 # print(sampleText)
 
 # sampleText.count()
+
