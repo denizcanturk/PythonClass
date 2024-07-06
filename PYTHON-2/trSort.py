@@ -18,7 +18,8 @@ s = 'Çınar'
 s.lower().translate(turkishTable)
 #'cinar'
 player_list = ['Zeynep','Ahmet', 'Çınar', 'Oğuz']
-
+mliet = [1,2,3,4]
 
 sorted(player_list, key=lambda s: s.lower().translate(turkishTable))
 #['Ahmet', 'Çınar', 'Oğuz', 'Zeynep']
+print(player_list + mliet)

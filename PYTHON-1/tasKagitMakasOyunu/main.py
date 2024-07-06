@@ -28,3 +28,4 @@ while True:
     k.hesapla(oyuncuSecenek, bilgisayarSecenek)
 
 #--------------------------------------------
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Button Click</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: #d3f8e2;
+            font-family: Arial, sans-serif;
+            position: relative; /* Required for absolute positioning within body */
+        }
+
+        button {
+            background-color: #ff6347; /* Tomato */
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            position: absolute; /* Allows positioning with top and left */
+            top: 50px; /* Adjust top position */
+            left: 50px; /* Adjust left position */
+        }
+
+        button:hover {
+            background-color: #ff8267; /* Lighter Tomato */
+        }
+    </style>
+</head>
+<body>
+    <button id="myButton">Click Me!</button>
+
+    <script>
+        document.getElementById('myButton').addEventListener('click', function() {
+            alert('You are awesome!');
+        });
+    </script>
+</body>
+</html>
