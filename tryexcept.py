@@ -55,9 +55,30 @@
 # except Exception as e:
 #     print(e)
 
-sayi = 5
+# sayi = 5
 
-if sayi < 6:
-    raise Exception("Bu değer tanımle limitin altında olamaz")
+# if sayi < 6:
+#     raise Exception("Bu değer tanımle limitin altında olamaz")
 
-print("Bakalım bu çalışacak mı?")
+# print("Bakalım bu çalışacak mı?")
+
+import random 
+
+a="taş"
+b="kağıt"
+c="makas"
+a>c
+b>a
+c>b
+while True:
+    kullanici=input("taş mı, kağıt mı, makas mı?:")
+    comp=random.choice([a,b,c])
+    if kullanici<comp:
+        print(f"Bilgisayar : {comp} kaybettiniz! :(")
+        break
+    elif kullanici>comp:
+        print(f"Bilgisayar : {comp} kazandınız! :)")
+        break     
+    else:
+        print(f"Bilgisayar : {comp} eşitlik")
+        kullanici=kullanici
