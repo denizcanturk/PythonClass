@@ -69,14 +69,5 @@ a = 5
 # elif a < 10:
 #     print("Bu seferde küçük")
 
-
-
-
-
-
-
-
-
-
-
-
+Bu da böyle bi değişiklik,
+bi satır daha
