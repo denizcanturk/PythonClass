@@ -120,8 +120,3 @@ set2 = {True, False, 123, "Gerbera"}
 #         print(" ",anahtar,":", deger)
 
 
-
-)
-
-
-

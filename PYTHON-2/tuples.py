@@ -1,12 +1,12 @@
 # a listesini içinde ki elemanlarden a harfi 
 # içerenlerden oluşan bir b listesi oluşturunuz
 
-a = ["elma","muz","çilek","kiwi", "armut"]
+# a = ["elma","muz","çilek","kiwi", "armut"]
 
-b = []
+# b = []
 
-b = [meyve for meyve in a if "a" in meyve]
-print(b)
+# b = [meyve for meyve in a if "a" in meyve]
+# print(b)
 
 
 # for i in range(len(a)):
@@ -19,3 +19,4 @@ print(b)
 # for i in a :
 #     if "a" in i:
 #         b.append(i)
+
