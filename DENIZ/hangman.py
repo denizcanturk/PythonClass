@@ -1,6 +1,7 @@
 import random as rd
 import tkinter as tk
 from tkinter import messagebox 
+
 d1 = \
 """ 
           
@@ -92,7 +93,6 @@ d10 = \
     |    / \\
   __|__"""
 
-
 wordList= [
     "Elma",
     "Araba",
@@ -124,7 +124,7 @@ class AdamAsmaca(tk.Tk):
         self.letters = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ"
         self.count = 10
         self.title("Adam Asmaca")
-        self.geometry("400x650")
+        self.geometry("400x570")
         self.resizable(False, False)
         self.drawWidgets()
         self.startTheGame()
@@ -146,36 +146,52 @@ class AdamAsmaca(tk.Tk):
         for idx in indices:
             self.wordMask = self.wordMask[:idx] + letter + self.wordMask[idx + 1:]
         
+    def lockWidgets(self):
+        self.entWord.config(state="readonly")
+        self.display.config(state="disabled")
+
+    def releaseWidgets(self):
+        self.entWord.config(state="normal")
+        self.display.config(state="normal")
 
     def startTheGame(self):
         self.pickedWord = rd.choice(wordList).upper()
-        print(self.pickedWord)
+        #print(self.pickedWord)
         self.wordMask = "_"*len(self.pickedWord)
+        self.releaseWidgets()
         self.entWord.delete(0,tk.END)
         self.entWord.insert(0,self.wordMask)
+
         for btn in self.buttons:
             btn.config(bg="white", state="normal")
+
         self.count = 10
         self.display.delete(0.0,tk.END)
+        self.lockWidgets()
 
     def onButtonClick(self, button,letter):
         button.config(bg="red", state="disabled")
         if letter in self.pickedWord:
             self.updateWordMask(letter)
+            self.releaseWidgets()
             self.entWord.delete(0,tk.END)
             self.entWord.insert(0,self.wordMask)
+            self.lockWidgets()
+            if "_" not in self.wordMask:
+                self.lockTheGame()
+                messagebox.showinfo("Oyun Bitti!","Tebrikler, Kazandınız... :)")
         else:
             self.count -= 1
-                
+            self.remaining.config(text=f"{self.count} hakkınız kaldı") 
             if self.count >= 0:
+                self.releaseWidgets()
                 self.display.delete(0.0, tk.END)
                 self.display.insert(0.0,self.hangSteps[(len(self.hangSteps)-self.count)-1])
+                self.lockWidgets()
                 
             if self.count == 0:
-                self.remaining.config(text=f"{self.count} hakkınız kaldı")
                 self.lockTheGame()
                 messagebox.showerror("Oyun Bitti", "Kaybettiniz! :(") 
-
 
     def drawWidgets(self):
         self.display = tk.Text(self, width=15, height=9,font=("Helvatica",30),state="normal",relief="groove")
@@ -201,13 +217,10 @@ class AdamAsmaca(tk.Tk):
                 row += 1
 
         self.remaining = tk.Label(self.frm, text="", font=("Helvatica",15), )
-        self.remaining.grid(row=4, column=0, columnspan=10,pady=10)
-
-        self.reset = tk.Button(self, text="Reset", command=None)
-        self.reset.pack(side=tk.LEFT, padx=5, pady=5)
-        self.replay = tk.Button(self, text="Play",command=self.startTheGame)
-        self.replay.pack(side=tk.LEFT, padx=5, pady=5)
-
+        self.remaining.grid(row=3, column=0, columnspan=10,pady=2)
+        
+        self.replay = tk.Button(self.frm, text="Play",command=self.startTheGame)
+        self.replay.grid(row=4, column=0, columnspan=10,pady=2, sticky="e")
 
 if __name__ == "__main__":
     app = AdamAsmaca()
