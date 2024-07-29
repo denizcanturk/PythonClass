@@ -1,147 +1,214 @@
-# Welcome to DataFlair Hangman Game:
+import random as rd
+import tkinter as tk
+from tkinter import messagebox 
+d1 = \
+""" 
+          
+          
+          
+          
+          
+          
+  ____"""
+d2 = \
+""" 
+    |      
+    |      
+    |      
+    |      
+    |      
+    |      
+  __|__"""
+d3 = \
+"""     _____
+    |/      
+    |      
+    |      
+    |      
+    |      
+    |      
+  __|__"""
+d4 = \
+"""     _____ 
+    |/    |
+    |     |
+    |      
+    |      
+    |      
+    |      
+  __|__"""
+d5= \
+"""     _____ 
+    |/    |
+    |     |
+    |     O 
+    |      
+    |      
+    |      
+  __|__"""
+d6 = \
+"""     _____ 
+    |/    |
+    |     |
+    |     O 
+    |     | 
+    |     | 
+    |      
+  __|__"""
+d7= \
+"""     _____ 
+    |/    |
+    |     |
+    |     O 
+    |    /| 
+    |     | 
+    |      
+  __|__"""
+d8 = \
+"""     _____ 
+    |/    |
+    |     |
+    |     O 
+    |    /|\\
+    |     | 
+    |      
+  __|__"""
+d9 = \
+"""     _____ 
+    |/    |
+    |     |
+    |     O 
+    |    /|\\
+    |     | 
+    |    / 
+  __|__"""
+d10 = \
+"""     _____ 
+    |/    |
+    |     |
+    |     O 
+    |    /|\\
+    |     | 
+    |    / \\
+  __|__"""
 
 
-import random
-import time
+wordList= [
+    "Elma",
+    "Araba",
+    "Bilgisayar",
+    "Kalem",
+    "Kitap",
+    "Masa",
+    "Sandalye",
+    "Kapı",
+    "Pencere",
+    "Telefon",
+    "Televizyon",
+    "Yatak",
+    "Buzdolabı",
+    "Çamaşır",
+    "Kedi",
+    "Köpek",
+    "Ayakkabı",
+    "Ceket",
+    "Pantolon",
+    "Gömlek"
+]
 
-# Initial Steps to invite in the game:
-print("\nWelcome to Hangman game by DataFlair\n")
-name = input("Enter your name: ")
-print("Hello " + name + "! Best of Luck!")
-time.sleep(2)
-print("The game is about to start!\n Let's play Hangaman!")
-time.sleep(3)
+class AdamAsmaca(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.buttons=[]
+        self.hangSteps = [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10]
+        self.letters = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ"
+        self.count = 10
+        self.title("Adam Asmaca")
+        self.geometry("400x650")
+        self.resizable(False, False)
+        self.drawWidgets()
+        self.startTheGame()
 
+    def lockTheGame(self):
+        for btn in self.buttons:
+            btn.config(bg="red", state="disabled")
 
-# The parameters we require to execute the game:
-def main():
-    global count
-    global display
-    global word
-    global already_guessed
-    global length
-    global play_game
-    words_to_guess = ["january","border","image","film","promise","kids","lungs","doll","rhyme","damage"
-                   ,"plants"]
-    word = random.choice(words_to_guess)
-    length = len(word)
-    count = 0
-    display = '_' * length
-    already_guessed = []
-    play_game = ""
+    def findAllOccurances(self, letter):
+        indices = []
+        idx = self.pickedWord.find(letter)
+        while idx != -1:
+            indices.append(idx)
+            idx = self.pickedWord.find(letter, idx + 1)
+        return indices
 
-# A loop to re-execute the game when the first round ends:
+    def updateWordMask(self, letter):
+        indices = self.findAllOccurances(letter)
+        for idx in indices:
+            self.wordMask = self.wordMask[:idx] + letter + self.wordMask[idx + 1:]
+        
 
-def play_loop():
-    global play_game
-    play_game = input("Do You want to play again? y = yes, n = no \n")
-    while play_game not in ["y", "n","Y","N"]:
-        play_game = input("Do You want to play again? y = yes, n = no \n")
-    if play_game == "y":
-        main()
-    elif play_game == "n":
-        print("Thanks For Playing! We expect you back again!")
-        exit()
+    def startTheGame(self):
+        self.pickedWord = rd.choice(wordList).upper()
+        print(self.pickedWord)
+        self.wordMask = "_"*len(self.pickedWord)
+        self.entWord.delete(0,tk.END)
+        self.entWord.insert(0,self.wordMask)
+        for btn in self.buttons:
+            btn.config(bg="white", state="normal")
+        self.count = 10
+        self.display.delete(0.0,tk.END)
 
-# Initializing all the conditions required for the game:
-def hangman():
-    global count
-    global display
-    global word
-    global already_guessed
-    global play_game
-    limit = 5
-    guess = input("This is the Hangman Word: " + display + " Enter your guess: \n")
-    guess = guess.strip()
-    if len(guess.strip()) == 0 or len(guess.strip()) >= 2 or guess <= "9":
-        print("Invalid Input, Try a letter\n")
-        hangman()
-
-
-    elif guess in word:
-        already_guessed.extend([guess])
-        index = word.find(guess)
-        word = word[:index] + "_" + word[index + 1:]
-        display = display[:index] + guess + display[index + 1:]
-        print(display + "\n")
-
-    elif guess in already_guessed:
-        print("Try another letter.\n")
-
-    else:
-        count += 1
-
-        if count == 1:
-            time.sleep(1)
-            print("   _____ \n"
-                  "  |      \n"
-                  "  |      \n"
-                  "  |      \n"
-                  "  |      \n"
-                  "  |      \n"
-                  "  |      \n"
-                  "__|__\n")
-            print("Wrong guess. " + str(limit - count) + " guesses remaining\n")
-
-        elif count == 2:
-            time.sleep(1)
-            print("   _____ \n"
-                  "  |     | \n"
-                  "  |     |\n"
-                  "  |      \n"
-                  "  |      \n"
-                  "  |      \n"
-                  "  |      \n"
-                  "__|__\n")
-            print("Wrong guess. " + str(limit - count) + " guesses remaining\n")
-
-        elif count == 3:
-           time.sleep(1)
-           print("   _____ \n"
-                 "  |     | \n"
-                 "  |     |\n"
-                 "  |     | \n"
-                 "  |      \n"
-                 "  |      \n"
-                 "  |      \n"
-                 "__|__\n")
-           print("Wrong guess. " + str(limit - count) + " guesses remaining\n")
-
-        elif count == 4:
-            time.sleep(1)
-            print("   _____ \n"
-                  "  |     | \n"
-                  "  |     |\n"
-                  "  |     | \n"
-                  "  |     O \n"
-                  "  |      \n"
-                  "  |      \n"
-                  "__|__\n")
-            print("Wrong guess. " + str(limit - count) + " last guess remaining\n")
-
-        elif count == 5:
-            time.sleep(1)
-            print("   _____ \n"
-                  "  |     | \n"
-                  "  |     |\n"
-                  "  |     | \n"
-                  "  |     O \n"
-                  "  |    /|\ \n"
-                  "  |    / \ \n"
-                  "__|__\n")
-            print("Wrong guess. You are hanged!!!\n")
-            print("The word was:",already_guessed,word)
-            play_loop()
-
-    if word == '_' * length:
-        print("Congrats! You have guessed the word correctly!")
-        play_loop()
-
-    elif count != limit:
-        hangman()
+    def onButtonClick(self, button,letter):
+        button.config(bg="red", state="disabled")
+        if letter in self.pickedWord:
+            self.updateWordMask(letter)
+            self.entWord.delete(0,tk.END)
+            self.entWord.insert(0,self.wordMask)
+        else:
+            self.count -= 1
+                
+            if self.count >= 0:
+                self.display.delete(0.0, tk.END)
+                self.display.insert(0.0,self.hangSteps[(len(self.hangSteps)-self.count)-1])
+                
+            if self.count == 0:
+                self.remaining.config(text=f"{self.count} hakkınız kaldı")
+                self.lockTheGame()
+                messagebox.showerror("Oyun Bitti", "Kaybettiniz! :(") 
 
 
-main()
+    def drawWidgets(self):
+        self.display = tk.Text(self, width=15, height=9,font=("Helvatica",30),state="normal",relief="groove")
+        self.display.pack(fill="both")
+        self.entWord = tk.Entry(self, text="",width=10,font=("Arial",30),bd=0, justify='center')
+        self.entWord.pack(anchor="center", pady=5)
+
+        num_buttons_per_row = 10
+        row = 0
+        column = 0
+        self.frm = tk.Frame(self)
+        self.frm.pack(anchor="center", fill="both",pady=5)
+
+        for letter in self.letters:
+            button = tk.Button(self.frm, text=letter)
+            button.config(command= lambda b=button, l=letter: self.onButtonClick(b,l))
+            button.grid(row=row, column=column, padx=1, pady=1)
+            self.buttons.append(button)
+            
+            column += 1
+            if column == num_buttons_per_row:
+                column = 0
+                row += 1
+
+        self.remaining = tk.Label(self.frm, text="", font=("Helvatica",15), )
+        self.remaining.grid(row=4, column=0, columnspan=10,pady=10)
+
+        self.reset = tk.Button(self, text="Reset", command=None)
+        self.reset.pack(side=tk.LEFT, padx=5, pady=5)
+        self.replay = tk.Button(self, text="Play",command=self.startTheGame)
+        self.replay.pack(side=tk.LEFT, padx=5, pady=5)
 
 
-hangman()
+if __name__ == "__main__":
+    app = AdamAsmaca()
+    app.mainloop()
