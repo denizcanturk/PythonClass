@@ -166,6 +166,7 @@ class AdamAsmaca(tk.Tk):
             btn.config(bg="white", state="normal")
 
         self.count = 10
+        self.remaining.config(text=f"{self.count} hakkınız kaldı") 
         self.display.delete(0.0,tk.END)
         self.lockWidgets()
 
@@ -190,13 +191,17 @@ class AdamAsmaca(tk.Tk):
                 self.lockWidgets()
                 
             if self.count == 0:
+                self.releaseWidgets()
+                self.entWord.delete(0,tk.END)
+                self.entWord.insert(0, self.pickedWord)
+                self.lockWidgets()
                 self.lockTheGame()
                 messagebox.showerror("Oyun Bitti", "Kaybettiniz! :(") 
 
     def drawWidgets(self):
         self.display = tk.Text(self, width=15, height=9,font=("Helvatica",30),state="normal",relief="groove")
         self.display.pack(fill="both")
-        self.entWord = tk.Entry(self, text="",width=10,font=("Arial",30),bd=0, justify='center')
+        self.entWord = tk.Entry(self, text="",width=20,font=("Arial",30),bd=0, justify='center')
         self.entWord.pack(anchor="center", pady=5)
 
         num_buttons_per_row = 10
