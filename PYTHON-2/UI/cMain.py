@@ -38,7 +38,7 @@ slider.pack(pady=10)
 
 # ProgressBar widget oluştur ve yerleştir
 progressbar = ctk.CTkProgressBar(root, mode="indeterminate")
-progressbar.set(0.5)  # İlerlemeyi %50'ye ayarla
+progressbar.set(0.1)  # İlerlemeyi %50'ye ayarla
 progressbar.pack(pady=10)
 progressbar.start()
 
