@@ -1,4 +1,3 @@
-from datetime import datetime
 from filemanager import FileManager
 
 class TxtManager(FileManager):
