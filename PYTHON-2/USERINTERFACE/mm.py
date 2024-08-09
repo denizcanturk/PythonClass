@@ -106,22 +106,3 @@ for i in range(5):
     frm2.columnconfigure(i, weight=1)
     frm3.columnconfigure(i,weight=1)
 root.mainloop()
-
-
-        # Configure rows and columns to expand
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_rowconfigure(2, weight=1)
-        self.grid_columnconfigure(0, weight=1)
-
-        # for frame in [self.ustFrame, self.ortaFrame, self.altFrame]:
-        #     frame.columnconfigure(0, weight=0)
-        #     frame.columnconfigure(1, weight=1)
-        #     frame.columnconfigure(tuple(range(6)), weight=1)
-        for i in range(8):
-            if i > 5:
-                self.altFrame.columnconfigure(i, weight=1)
-            else:
-                self.ortaFrame.columnconfigure(i, weight=1)
-                self.ustFrame.columnconfigure(i, weight=1)
-                self.altFrame.columnconfigure(i, weight=1)

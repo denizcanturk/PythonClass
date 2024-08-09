@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import random  # For simulating sensor readings
-from worker import Worker
+from projectLibs.worker import Worker
 
 class Application(tk.Tk):
     def __init__(self):

@@ -1,9 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 import random  # For simulating sensor readings
-import os
-from worker import Worker
-from dbmanager import Database
+from projectLibs.worker import Worker
+from projectLibs.dbmanager import Database
 
 
 # Assuming the Database class is in the same file or imported from another module
