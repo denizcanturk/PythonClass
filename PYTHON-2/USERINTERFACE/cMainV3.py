@@ -16,9 +16,11 @@ class Application(tk.Tk):
 
         # Initialize the database
         self.db = Database(db_file)
+        print("Database initialized")
 
         # Fetch recipes from the database
         self.recipes = self.db.fetch_recipes()
+        print("Fetched recipes:", self.recipes)  # Debugging statement
 
         # Setup Frames
         self.setup_frames()
@@ -132,7 +134,7 @@ class Application(tk.Tk):
 
 if __name__ == "__main__":
     # Ensure the database file exists or create it
-    db_file = 'recipes.db'
+    db_file = '/home/debinci/Desktop/proje/PYTHON-2/USERINTERFACE/recipes.db'
 
     app = Application(db_file)
     app.protocol("WM_DELETE_WINDOW", app.on_closing)

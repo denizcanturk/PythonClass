@@ -9,15 +9,18 @@ class Database:
         :param db_file: Path to the SQLite database file.
         """
         self.db_file = db_file
-        self.initialize(self.db_file)
+        
+        #self.initialize(db_file)
         self.connection = sqlite3.connect(db_file)
         self.cursor = self.connection.cursor()
         self.create_table()
+        self.insert_sample_data()  # Insert sample data for testing
         
     def create_table(self):
         """
         Create the recipes table if it doesn't already exist.
         """
+        print("create table func called...")
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS recipes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,6 +34,27 @@ class Database:
         )
         ''')
         self.connection.commit()
+        print("Table created or already exists.")
+
+    def insert_sample_data(self):
+        """
+        Insert sample data into the recipes table for testing.
+        """
+        print("Inserting sample data...")
+        self.cursor.execute('''
+        INSERT INTO recipes (name, co2, ph, su_s, ort_s, nem, ec)
+        VALUES ('Salatalık', '400', '7.0', '20', '25', '50', '1.2')
+        ''')
+        self.cursor.execute('''
+        INSERT INTO recipes (name, co2, ph, su_s, ort_s, nem, ec)
+        VALUES ('Marul', '800', '5.8', '36', '45', '89', '2.8')
+        ''')
+        self.cursor.execute('''
+        INSERT INTO recipes (name, co2, ph, su_s, ort_s, nem, ec)
+        VALUES ('Çilek', '1100', '9.4', '53', '17', '98', '3.5')
+        ''')
+        self.connection.commit()
+        print("Sample data inserted.")
 
     def insert_recipe(self, name, co2, ph, su_s, ort_s, nem, ec):
         """
@@ -44,6 +68,7 @@ class Database:
         :param nem: Nem value.
         :param ec: EC value.
         """
+        print("İnsert function called")
         self.cursor.execute('''
         INSERT INTO recipes (name, co2, ph, su_s, ort_s, nem, ec)
         VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -56,8 +81,10 @@ class Database:
 
         :return: A dictionary where keys are recipe names and values are tuples of recipe data.
         """
+        print("fetch function called")
         self.cursor.execute('SELECT name, co2, ph, su_s, ort_s, nem, ec FROM recipes')
         recipes = self.cursor.fetchall()
+        print("Fetched recipes from DB:", recipes)  # Debugging statement
         return {name: (co2, ph, su_s, ort_s, nem, ec) for (name, co2, ph, su_s, ort_s, nem, ec) in recipes}
 
     def close(self):
@@ -73,6 +100,7 @@ class Database:
 
         :param db_file: Path to the SQLite database file.
         """
+        print("İnit db func called...")
         if not os.path.exists(db_file):
             # Create the database and insert initial data
             db = cls(db_file)  # Create the Database object
