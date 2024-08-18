@@ -2,7 +2,7 @@ import threading
 import time
 
 def print_numbers():
-    for i in range(10):
+    for i in range(5):
         time.sleep(1)
         print(i)
 
