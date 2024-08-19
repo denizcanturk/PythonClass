@@ -1,7 +1,8 @@
+#pip install numpy pillow opencv-python numpy-stl pymeshlab
 import numpy as np
 from PIL import Image
-from stl.ascii import Mesh
 import cv2
+from stl import mesh
 import pymeshlab
 import os
 
@@ -22,7 +23,7 @@ def image_to_string_art(image_path, output_path, num_pins=200, radius=100, image
     string_path = []
     for i in range(num_pins):
         for j in range(i + 1, num_pins):
-            line = create_line(pins[i], pins[j])
+            line = create_line(pins[i], pins[j], image_size)
             if np.any(edges[line[:, 1].astype(int), line[:, 0].astype(int)]):
                 string_path.append((i, j))
     
@@ -41,7 +42,7 @@ def image_to_string_art(image_path, output_path, num_pins=200, radius=100, image
     faces = np.array(faces)
 
     # Create the mesh
-    stl_mesh = Mesh(np.zeros(faces.shape[0], dtype=Mesh.dtype))
+    stl_mesh = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
     for i, f in enumerate(faces):
         for j in range(3):
             stl_mesh.vectors[i][j] = vertices[f[j], :]
@@ -61,19 +62,23 @@ def image_to_string_art(image_path, output_path, num_pins=200, radius=100, image
     ms.apply_filter('remove_duplicate_vertices')
     
     # Simplify the mesh if necessary
-    ms.apply_filter('simplify', targetfacenum=int(len(faces) * 0.5))
+    target_face_num = max(3, int(len(faces) * 0.5))  # Ensure a minimum of 3 faces
+    ms.apply_filter('simplify', targetfacenum=target_face_num)
 
     # Save the repaired and simplified mesh
     ms.save_current_mesh(output_path)
 
     # Ensure the file size is within limits
-    while os.path.getsize(output_path) > 10*1024*1024:
-        ms.apply_filter('simplify', targetfacenum=int(ms.current_mesh().face_number() * 0.9))
+    max_size = 10 * 1024 * 1024  # 10 MB
+    while os.path.getsize(output_path) > max_size:
+        # Simplify the mesh further if necessary
+        target_face_num = max(3, int(ms.current_mesh().face_number() * 0.9))
+        ms.apply_filter('simplify', targetfacenum=target_face_num)
         ms.save_current_mesh(output_path)
     
     print(f"STL file saved to {output_path}, size: {os.path.getsize(output_path) / (1024 * 1024):.2f} MB")
 
-def create_line(p1, p2):
+def create_line(p1, p2, image_size):
     # Bresenham's line algorithm
     p1 = np.array(p1)
     p2 = np.array(p2)
@@ -91,12 +96,14 @@ def create_line(p1, p2):
     y = int(p1[1])
     for x in range(int(p1[0]), int(p2[0]) + 1):
         coord = (y, x) if steep else (x, y)
-        line.append(coord)
+        if 0 <= coord[0] < image_size[1] and 0 <= coord[1] < image_size[0]:
+            line.append(coord)
         error -= dy
         if error < 0:
             y += ystep
             error += dx
     return np.array(line)
+
 # Usage example
 image_path = '/home/debinci/Desktop/proje/Oynamalik/cat.jpeg'
 output_path = 'output_string_art.stl'
