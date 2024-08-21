@@ -18,7 +18,7 @@ class ClientApp(tk.Tk):
         self.connect_button = tk.Button(self, text="Connect", command=self.connect_to_server)
         self.connect_button.grid(row=2, column=0, sticky="nsew")
 
-        self.disconnect_button = tk.Button(self, text="Disconnect", command=self.disconnect_from_server, state="disabled")
+        self.disconnect_button = tk.Button(self, text="Disconnect", command=self.disconnect_from_server, state="normal")
         self.disconnect_button.grid(row=3, column=0, sticky="nsew")
 
         self.text_area = tk.Text(self, state="disabled")
@@ -44,7 +44,7 @@ class ClientApp(tk.Tk):
         if self.socket is not None:
             self.text_area.config(state="normal")
             self.text_area.insert(tk.END, "Already connected or connection in progress.\n")
-            self.text_area.config(state="disabled")
+            #self.text_area.config(state="disabled")
             return
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -52,35 +52,35 @@ class ClientApp(tk.Tk):
             self.socket.connect((ip, 61127))
             self.text_area.config(state="normal")
             self.text_area.insert(tk.END, "Connected to server\n")
-            self.text_area.config(state="disabled")
-            self.connect_button.config(state="disabled")
-            self.disconnect_button.config(state="normal")
+            #self.text_area.config(state="disabled")
+            #self.connect_button.config(state="disabled")
+            #self.disconnect_button.config(state="normal")
             self.receive_thread = threading.Thread(target=self.receive_messages)
             self.receive_thread.start()
         except Exception as e:
             self.text_area.config(state="normal")
             self.text_area.insert(tk.END, f"Failed to connect: {e}\n")
-            self.text_area.config(state="disabled")
+            #self.text_area.config(state="disabled")
             self.socket = None  # Reset the socket object
 
     def disconnect_from_server(self):
         if self.socket:
             self.text_area.config(state="normal")
             self.text_area.insert(tk.END, "Disconnecting...\n")
-            self.text_area.config(state="disabled")
+            #self.text_area.config(state="disabled")
             try:
                 self.socket.shutdown(socket.SHUT_RDWR)
                 self.socket.close()
                 self.socket = None
                 self.connect_button.config(state="normal")
-                self.disconnect_button.config(state="disabled")
+                #self.disconnect_button.config(state="disabled")
                 self.text_area.config(state="normal")
                 self.text_area.insert(tk.END, "Disconnected from server\n")
-                self.text_area.config(state="disabled")
+                #self.text_area.config(state="disabled")
             except Exception as e:
-                self.text_area.config(state="normal")
+                #self.text_area.config(state="normal")
                 self.text_area.insert(tk.END, f"Error during disconnection: {e}\n")
-                self.text_area.config(state="disabled")
+                #self.text_area.config(state="disabled")
 
     def send_message(self, event=None):
         if self.socket:
@@ -93,9 +93,9 @@ class ClientApp(tk.Tk):
                     self.text_area.config(state="disabled")
                     self.msg_entry.delete(0, tk.END)
                 except Exception as e:
-                    self.text_area.config(state="normal")
+                    #self.text_area.config(state="normal")
                     self.text_area.insert(tk.END, f"Failed to send message: {e}\n")
-                    self.text_area.config(state="disabled")
+                    #self.text_area.config(state="disabled")
 
     def receive_messages(self):
         while self.socket:
@@ -104,13 +104,13 @@ class ClientApp(tk.Tk):
                 if message:
                     self.text_area.config(state="normal")
                     self.text_area.insert(tk.END, f"Server: {message}\n")
-                    self.text_area.config(state="disabled")
+                    #self.text_area.config(state="disabled")
                 else:
                     break
             except Exception as e:
                 self.text_area.config(state="normal")
                 self.text_area.insert(tk.END, f"Error receiving message: {e}\n")
-                self.text_area.config(state="disabled")
+                #self.text_area.config(state="disabled")
                 break
         self.disconnect_from_server()  # Ensure proper disconnection
 

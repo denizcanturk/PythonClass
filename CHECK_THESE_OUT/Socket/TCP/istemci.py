@@ -24,16 +24,20 @@ client = sc.socket(sc.AF_INET, sc.SOCK_STREAM)
 try:
     # Connect to the server
     client.connect((server_ip, server_port))
-    print("Connected to the server")
+    print(f"Connected to the server on {server_port}")
+    while True:
+        # Send a message to the server
+        msg = input("Enter a message: ")
+        client.send(msg.encode("utf-8"))
+        if msg == "exit":
+            break
 
-    # Send a message to the server
-    msg = input("Enter a message: ")
-    client.send(msg.encode("utf-8"))
-
-    print("Message sent")
+        print("Message sent")
 
 except Exception as e:
     print("Houston we have a problem!")
+    print(str(e))
+    
 finally:
     # Close the connection
     client.close()

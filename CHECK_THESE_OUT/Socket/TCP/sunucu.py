@@ -25,9 +25,13 @@ server.listen(5)
 
 print(f"Server listening on port {myPort}...")
 
+
+comm_sock, clientAddr = server.accept()
+print(f"Connected to : {clientAddr}")
 while True:
-    comm_sock, clientAddr = server.accept()
-    print(f"Connected to : {clientAddr}")
     msg = comm_sock.recv(1024).decode("utf-8")
     print(f"Received message: {msg}")
-    comm_sock.close()
+    if msg == "exit":
+        break
+    
+comm_sock.close()
