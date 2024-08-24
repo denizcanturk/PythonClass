@@ -14,8 +14,6 @@ import socket as sc
 
 # Get the server's IP address
 server_ip = "192.168.1.26" #get_local_ip()  # Change this to the server's IP address if different
-print(server_ip)
-print(type(server_ip))
 server_port = 61127
 
 # Create a socket object
