@@ -7,6 +7,7 @@ class ClientApp(ctk.CTk):
         super().__init__()
         self.title("Chat Client")
         self.geometry("400x480")
+        self._windows_set_titlebar_color("red")
         self.server_ip = ""
         self.server_port = 61127
         self.username = None 
