@@ -53,12 +53,16 @@ class ClientApp(ctk.CTk):
     def setUsername(self, event=None):
         self.username = self.usernameEntry.get().strip()
 
+    def setIPAddress(self):
+        self.server_ip = self.serverIPEntry.get().strip()
+
 
     def connectToServer(self):
         if not self.client_socket:
             self.client_socket = sc.socket(sc.AF_INET, sc.SOCK_STREAM)
             try:
                 self.setUsername()
+                self.setIPAddress()
                 self.client_socket.connect((self.server_ip, self.server_port))
                 self.client_socket.send(self.username.encode("utf-8"))
                 self.textArea.insert(ctk.END, "Connected to server.\n")
