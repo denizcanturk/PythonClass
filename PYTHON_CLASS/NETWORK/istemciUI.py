@@ -108,15 +108,21 @@ class ClientApp(ctk.CTk):
                 try:
                     self.client_socket.shutdown(sc.SHUT_RDWR)  # Gracefully shut down the socket
                     self.client_socket.close()
-                    self.connectSwitch.deselect()
                 except Exception as e:
                     self.updateTextArea(f"Error disconnecting from server: {e}\n")
-            if self.receive_thread and self.receive_thread.is_alive():
-                self.receive_thread.join()
+            
             self.client_socket = None
-            self.receive_thread = None
-            self.connectSwitch.configure(text="Connect", state="off")
+            self.connectSwitch.deselect()
+            self.connectSwitch.configure(text="Connect", state="normal")
             self.updateTextArea("Disconnected from server.\n")
+
+            # Use after() to schedule the thread join
+            self.after(100, self.join_receive_thread)
+
+    def join_receive_thread(self):
+        if self.receive_thread and self.receive_thread.is_alive():
+            self.receive_thread.join(timeout=0.1)
+        self.receive_thread = None
 
     def updateTextArea(self, message):
         self.after(0, self.textArea.insert, ctk.END, message)
