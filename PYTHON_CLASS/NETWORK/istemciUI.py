@@ -88,6 +88,8 @@ class ClientApp(ctk.CTk):
             self.client_socket.send(msg.encode("utf-8"))
             self.textArea.insert(ctk.END, f"You: {msg}\n")
             self.messageEntry.delete(0, ctk.END)
+            if msg=="exit":
+                self.disconnectFromServer()
 
     def disconnectFromServer(self):
         if self.connected:
@@ -97,11 +99,14 @@ class ClientApp(ctk.CTk):
                 try:
                     self.client_socket.send("exit".encode("utf-8"))  # Notify server of disconnection
                     self.client_socket.close()
+                    self.connectSwitch.deselect()
+
                 except Exception as e:
                     self.textArea.insert(ctk.END, f"Error disconnecting from server: {e}\n")
             if self.receive_thread and self.receive_thread.is_alive():
                 self.receive_thread.join()
             self.client_socket = None
+            self.receive_thread = None 
             self.connectSwitch.configure(text="Connect", state="off")  # Update switch text
             self.textArea.insert(ctk.END, "Disconnected from server.\n")
 

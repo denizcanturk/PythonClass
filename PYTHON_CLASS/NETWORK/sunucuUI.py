@@ -47,33 +47,34 @@ class ServerApp(ctk.CTk):
         if not self.serverSocket:
             self.serverSocket = sc.socket(sc.AF_INET, sc.SOCK_STREAM)
             self.serverSocket.setsockopt(sc.SOL_SOCKET, sc.SO_REUSEADDR, 1)
+            self.serverSocket.settimeout(1)  # Set a short timeout for non-blocking behavior
             try:
                 self.serverSocket.bind(("", self.portNum))
                 self.serverSocket.listen(self.maxClientNum)
-                self.textArea.insert(ctk.END, "Server started!\nWaiting for incoming connections...\n")
+                self.updateTextArea("Server started!\nWaiting for incoming connections...\n")
                 self.server_running = True
                 self.connectSwitch.configure(text="Stop Server", state="on")
-                self.acceptThread = tr.Thread(target=self.acceptConnections)
+                self.acceptThread = tr.Thread(target=self.acceptConnections, daemon=True)
                 self.acceptThread.start()
             except Exception as e:
-                self.textArea.insert(ctk.END, f"Failed to start server: {e}\n")
-                self.connectSwitch.set("off")
+                self.updateTextArea(f"Failed to start server: {e}\n")
+                self.connectSwitch.configure(text="Start Server", state="off")
 
     def stopServer(self):
         if self.serverSocket:
-            self.textArea.insert(ctk.END, "Stopping the server...\n")
+            self.updateTextArea("Stopping the server...\n")
             self.server_running = False
             if self.acceptThread and self.acceptThread.is_alive():
                 self.acceptThread.join()  # Wait for the accept thread to finish
-            for clientSocket in self.connectedClients.values():
+            for clientSocket in list(self.connectedClients.values()):
                 try:
                     clientSocket.send("Server is shutting down...".encode("utf-8"))
                     clientSocket.close()
                 except Exception as e:
-                    self.textArea.insert(ctk.END, f"Error disconnecting from client: {e}\n")
+                    self.updateTextArea(f"Error disconnecting from client: {e}\n")
             self.serverSocket.close()
             self.serverSocket = None
-            self.textArea.insert(ctk.END, "Server stopped.\n")
+            self.updateTextArea("Server stopped.\n")
             self.connectedClients.clear()
             self.clientCount = 0
             self.labelUpdates()
@@ -83,15 +84,17 @@ class ServerApp(ctk.CTk):
         while self.server_running:
             try:
                 clientSocket, ipAddr = self.serverSocket.accept()
-                self.textArea.insert(ctk.END, f"Connection accepted from {ipAddr}\n")
+                self.updateTextArea(f"Connection accepted from {ipAddr}\n")
                 self.clientCount += 1
                 self.labelUpdates()
-                clientThread = tr.Thread(target=self.handleClient, args=(clientSocket,))
+                clientThread = tr.Thread(target=self.handleClient, args=(clientSocket,), daemon=True)
                 clientThread.start()
+            except sc.timeout as e:
+                # Handle the timeout exception to continue accepting connections
+                pass
             except Exception as e:
-                if self.server_running:  # Only log if the server is still running
-                    self.textArea.insert(ctk.END, f"Error accepting connection: {e}\n")
-                break
+                if self.server_running:
+                    self.updateTextArea(f"Error accepting connection: {e}\n")
 
     def labelUpdates(self):
         self.lblClientCount.configure(text=self.lblDefaulttext + str(self.clientCount))
@@ -103,20 +106,22 @@ class ServerApp(ctk.CTk):
             if not username:
                 username = f"Client{len(self.connectedClients) + 1}"
 
-            self.textArea.insert(ctk.END, f"{username} has joined the chat.\n")
+            self.updateTextArea(f"{username} has joined the chat.\n")
             self.connectedClients[username] = clientSocket
             self.broadcastMsg(f"{username} has joined the chat.")
 
             while self.server_running:
                 try:
                     msg = clientSocket.recv(1024).decode("utf-8")
+                    if not msg:
+                        break
                     if msg == "exit":
                         break
-                    self.textArea.insert(ctk.END, f"{username}: {msg}\n")
+                    self.updateTextArea(f"{username}: {msg}\n")
                     if self.rbBroadcast.get():
                         self.broadcastMsg(f"{username}: {msg}")
                 except Exception as e:
-                    self.textArea.insert(ctk.END, f"Error handling client: {e}\n")
+                    self.updateTextArea(f"Error handling client: {e}\n")
                     break
         finally:
             clientSocket.close()
@@ -124,22 +129,25 @@ class ServerApp(ctk.CTk):
                 del self.connectedClients[username]
                 self.clientCount -= 1
                 self.labelUpdates()
-                self.textArea.insert(ctk.END, f"{username} has left the chat.\n")
+                self.updateTextArea(f"{username} has left the chat.\n")
                 self.broadcastMsg(f"{username} has left the chat.")
 
     def broadcastMsg(self, msg):
-        for clientSocket in self.connectedClients.values():
+        for clientSocket in list(self.connectedClients.values()):
             try:
                 clientSocket.send(msg.encode("utf-8"))
             except Exception as e:
-                self.textArea.insert(ctk.END, f"Error broadcasting message: {e}\n")
+                self.updateTextArea(f"Error broadcasting message: {e}\n")
 
     def sendMessage(self, event=None):
         msg = self.messageEntry.get()
         if msg:
-            self.textArea.insert(ctk.END, f"Server: {msg}\n")
+            self.updateTextArea(f"Server: {msg}\n")
             self.broadcastMsg(f"Server: {msg}")
             self.messageEntry.delete(0, ctk.END)
+
+    def updateTextArea(self, message):
+        self.after(0, self.textArea.insert, ctk.END, message)
 
 if __name__ == "__main__":
     app = ServerApp()
