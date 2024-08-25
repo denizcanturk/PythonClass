@@ -79,6 +79,7 @@ class ClientApp(ctk.CTk):
                 if msg:
                     self.updateTextArea(f"{msg}\n")
                 else:
+                    # Server has closed the connection
                     self.disconnectFromServer()
             except sc.timeout:
                 continue  # Continue to loop if the socket times out
@@ -94,7 +95,7 @@ class ClientApp(ctk.CTk):
                 self.client_socket.send(msg.encode("utf-8"))
                 self.updateTextArea(f"You: {msg}\n")
                 self.messageEntry.delete(0, ctk.END)
-                if msg == "exit":
+                if msg.lower() == "exit":
                     self.disconnectFromServer()
             except Exception as e:
                 self.updateTextArea(f"Error sending message: {e}\n")
@@ -105,7 +106,7 @@ class ClientApp(ctk.CTk):
             self.connected = False
             if self.client_socket:
                 try:
-                    self.client_socket.send("exit".encode("utf-8"))
+                    self.client_socket.shutdown(sc.SHUT_RDWR)  # Gracefully shut down the socket
                     self.client_socket.close()
                     self.connectSwitch.deselect()
                 except Exception as e:
